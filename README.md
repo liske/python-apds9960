@@ -15,9 +15,9 @@ Features:
 - I²C interface (hard wired I²C address: 0x39)
 
 Documentation:
-- [RPi](RASPBERRY.md) - connect and configure the APDS-9960 on Raspberry Pi
+- [RPi](RPi.md) - connect and configure the APDS-9960 on Raspberry Pi
 - Example scripts:
-  - [test-ambient](test-ambient) - simple ambient light level demo
-  - [test-gesture](test-gesture) - simple gesture detection demo
-  - [test-prox](test-prox) - simple proximity level demo
+  - [test-ambient.py](test-ambient.py) - simple ambient light level demo
+  - [test-gesture.py](test-gesture.py) - simple gesture detection demo
+  - [test-prox.py](test-prox.py) - simple proximity level demo
   

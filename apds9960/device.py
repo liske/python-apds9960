@@ -1,5 +1,5 @@
-from rpi_apds9960.const import *
-from rpi_apds9960.exceptions import *
+from apds9960.const import *
+from apds9960.exceptions import *
 
 from time import sleep
 

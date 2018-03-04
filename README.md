@@ -20,4 +20,4 @@ Documentation:
   - [test-ambient.py](test-ambient.py) - simple ambient light level demo
   - [test-gesture.py](test-gesture.py) - simple gesture detection demo
   - [test-prox.py](test-prox.py) - simple proximity level demo
-
+  - micropython/* - same as above, but for MicroPython, using uAPDS9960, Pin, I2C  

@@ -1083,3 +1083,21 @@ class APDS9960:
     # *******************************************************************************
 
     # resets all the parameters in the gesture data member
+
+
+
+class uAPDS9960(APDS9960):
+    """
+    APDS9960 for MicroPython
+
+    sensor = uAPDS9960(bus=I2C_instance,
+                       address=APDS9960_I2C_ADDR, valid_id=APDS9960_DEV_ID)
+    """
+    def _read_byte_data(self, cmd):
+        return self.bus.readfrom_mem(self.address, cmd, 1)[0]
+
+    def _write_byte_data(self, cmd, val):
+        self.bus.writeto_mem(self.address, cmd, bytes([val]))
+
+    def _read_i2c_block_data(self, cmd, num):
+        return self.bus.readfrom_mem(self.address, cmd, num)

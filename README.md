@@ -17,7 +17,6 @@ Features:
 Documentation:
 - [RPi](RPi.md) - connect and configure the APDS-9960 on Raspberry Pi
 - Example scripts:
-  - [test-ambient.py](test-ambient.py) - simple ambient light level demo
-  - [test-gesture.py](test-gesture.py) - simple gesture detection demo
-  - [test-prox.py](test-prox.py) - simple proximity level demo
-  - micropython/* - same as above, but for MicroPython, using uAPDS9960, Pin, I2C  
+  - simple ambient light level demo: [rpi](rpi/test_ambient.py), [micropython](micropython/test_ambient.py)
+  - simple gesture detection demo: [rpi](rpi/test_gesture.py), [micropython](micropython/test_gesture.py)
+  - simple proximity level demo: [rpi](rpi/test_prox.py), [micropython](micropython/test_prox.py)

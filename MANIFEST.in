@@ -1,0 +1,5 @@
+# include docs
+include *.md
+
+# include license
+include LICENSE.txt

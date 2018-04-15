@@ -1,4 +1,4 @@
-# Python APDS-9960 Library
+# Python (and MicroPython) APDS-9960 Library
 
 Python library for the APDS-9960 gesture sensor developed while I was looking to get the APDS-9960 to work with a _Raspberry Pi_ to build a user interface feeling like in _Minority Report_.
 
@@ -17,7 +17,6 @@ Features:
 Documentation:
 - [RPi](RPi.md) - connect and configure the APDS-9960 on Raspberry Pi
 - Example scripts:
-  - [test-ambient.py](test-ambient.py) - simple ambient light level demo
-  - [test-gesture.py](test-gesture.py) - simple gesture detection demo
-  - [test-prox.py](test-prox.py) - simple proximity level demo
-  
+  - simple ambient light level demo: [rpi](rpi/test_ambient.py), [micropython](micropython/test_ambient.py)
+  - simple gesture detection demo: [rpi](rpi/test_gesture.py), [micropython](micropython/test_gesture.py)
+  - simple proximity level demo: [rpi](rpi/test_prox.py), [micropython](micropython/test_prox.py)

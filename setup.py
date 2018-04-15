@@ -12,6 +12,7 @@ setup(
     url = 'https://github.com/liske/python-apds9960/',
     download_url = 'https://github.com/liske/python-apds9960/archive/0.1.tar.gz',
     keywords = 'apds9960',
+    license='GPLv3+',
     long_description=open('README.md', 'r').read(),
     long_description_content_type='text/markdown',
     classifiers = [

@@ -6,7 +6,16 @@ This library is a port of the [APDS-9960 Raspberry Pi Library](https://bitbucket
 
 This library has been tested with [SparkFun RGB and Gesture Sensor - APDS-9960](https://www.sparkfun.com/products/12787) but should work with any other APDS-9960 based I²C device, too.
 
-Features:
+## Installation
+
+This library is available from [PyPi](https://pypi.org/project/apds9960/). You may want to setup a `virtualenv` before installing the library using:
+
+```
+pip install apds9960
+```
+
+
+## Features of the APDS-9960
 - operational voltage: 3.3V
 - ambient light & RGB color sensing
 - proximity sensing
@@ -14,7 +23,7 @@ Features:
 - operating range: 10 - 20cm
 - I²C interface (hard wired I²C address: 0x39)
 
-Documentation:
+## Documentation & Examples
 - [RPi](RPi.md) - connect and configure the APDS-9960 on Raspberry Pi
 - Example scripts:
   - simple ambient light level demo: [rpi](rpi/test_ambient.py), [micropython](micropython/test_ambient.py)

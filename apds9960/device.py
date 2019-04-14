@@ -57,7 +57,7 @@ class APDS9960:
         self.setProxIntHighThresh(APDS9960_DEFAULT_PIHT)
         self.setLightIntLowThreshold(APDS9960_DEFAULT_AILT)
         self.setLightIntHighThreshold(APDS9960_DEFAULT_AIHT)
-        
+
         self._write_byte_data(APDS9960_REG_PERS, APDS9960_DEFAULT_PERS)
         self._write_byte_data(APDS9960_REG_CONFIG2, APDS9960_DEFAULT_CONFIG2)
         self._write_byte_data(APDS9960_REG_CONFIG3, APDS9960_DEFAULT_CONFIG3)

@@ -285,6 +285,7 @@ class APDS9960:
     # High-level gesture controls
     # *******************************************************************************
 
+    # resets all the parameters in the gesture data member
     def resetGestureParameters(self):
         self.gesture_data_.index = 0
         self.gesture_data_.total_gestures = 0
@@ -1076,13 +1077,6 @@ class APDS9960:
 
     def _read_i2c_block_data(self, cmd, num):
         return self.bus.read_i2c_block_data(self.address, cmd, num)
-
-
-    # *******************************************************************************
-    # High-level gesture controls
-    # *******************************************************************************
-
-    # resets all the parameters in the gesture data member
 
 
 

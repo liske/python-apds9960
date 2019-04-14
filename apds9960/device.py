@@ -23,23 +23,23 @@ class APDS9960:
         # instance variables for gesture detection
         self.gesture_ud_delta_ = 0
         self.gesture_lr_delta_ = 0
-	
+
         self.gesture_ud_count_ = 0
         self.gesture_lr_count_ = 0
-	
+
         self.gesture_near_count_ = 0
         self.gesture_far_count_ = 0
-	
+
         self.gesture_state_ = 0
         self.gesture_motion_ = APDS9960_DIR_NONE
 
         self.gesture_data_ = APDS9960.GestureData()
-    
+
         # check device id
         self.dev_id = self._read_byte_data(APDS9960_REG_ID)
         if not self.dev_id in valid_id:
             raise ADPS9960InvalidDevId(self.dev_id, valid_id)
-            
+
         # disable all features
         self.setMode(APDS9960_MODE_ALL, False)
 
@@ -61,7 +61,7 @@ class APDS9960:
         self._write_byte_data(APDS9960_REG_PERS, APDS9960_DEFAULT_PERS)
         self._write_byte_data(APDS9960_REG_CONFIG2, APDS9960_DEFAULT_CONFIG2)
         self._write_byte_data(APDS9960_REG_CONFIG3, APDS9960_DEFAULT_CONFIG3)
-	
+
         # set default values for gesture sense registers
         self.setGestureEnterThresh(APDS9960_DEFAULT_GPENTH)
         self.setGestureExitThresh(APDS9960_DEFAULT_GEXTH)
@@ -81,14 +81,14 @@ class APDS9960:
 
     def getMode(self):
         return self._read_byte_data(APDS9960_REG_ENABLE)
-    
+
     def setMode(self, mode, enable=True):
         # read ENABLE register
         reg_val = self.getMode()
-	
+
         if mode < 0 or mode > APDS9960_MODE_ALL:
             raise ADPS9960InvalidMode(mode)
-    
+
         # change bit(s) in ENABLE register */
         if mode == APDS9960_MODE_ALL:
             if enable:
@@ -100,7 +100,7 @@ class APDS9960:
                 reg_val |= (1 << mode);
             else:
                 reg_val &= ~(1 << mode);
-	
+
         # write value to ENABLE register
         self._write_byte_data(APDS9960_REG_ENABLE, reg_val)
 
@@ -156,10 +156,10 @@ class APDS9960:
     # check if there is a gesture available
     def isGestureAvailable(self):
         val = self._read_byte_data(APDS9960_REG_GSTATUS)
-	
+
         # shift and mask out GVALID bit
         val &= APDS9960_BIT_GVALID;
-	
+
         return (val == APDS9960_BIT_GVALID)
 
 
@@ -168,11 +168,11 @@ class APDS9960:
         fifo_level = 0
         bytes_read = 0
         fifo_data = []
-	
+
         # make sure that power and gesture is on and data is valid
         if not (self.getMode() & 0b01000001) or not self.isGestureAvailable():
             return APDS9960_DIR_NONE
-	
+
         # keep looping as long as gesture data is valid
         while(self.isGestureAvailable()):
             # read the current FIFO level
@@ -235,7 +235,7 @@ class APDS9960:
     def readAmbientLight(self):
         # read value from clear channel, low byte register
         l = self._read_byte_data(APDS9960_REG_CDATAL)
-	
+
         # read value from clear channel, high byte register
         h = self._read_byte_data(APDS9960_REG_CDATAH)
 
@@ -245,7 +245,7 @@ class APDS9960:
     def readRedLight(self):
         # read value from red channel, low byte register
         l = self._read_byte_data(APDS9960_REG_RDATAL)
-	
+
         # read value from red channel, high byte register
         h = self._read_byte_data(APDS9960_REG_RDATAH)
 
@@ -255,7 +255,7 @@ class APDS9960:
     def readGreenLight(self):
         # read value from green channel, low byte register
         l = self._read_byte_data(APDS9960_REG_GDATAL)
-	
+
         # read value from green channel, high byte register
         h = self._read_byte_data(APDS9960_REG_GDATAH)
 
@@ -265,7 +265,7 @@ class APDS9960:
     def readBlueLight(self):
         # read value from blue channel, low byte register
         l = self._read_byte_data(APDS9960_REG_BDATAL)
-	
+
         # read value from blue channel, high byte register
         h = self._read_byte_data(APDS9960_REG_BDATAH)
 
@@ -426,7 +426,7 @@ class APDS9960:
         if self.gesture_state_ == APDS9960_STATE_FAR:
             self.gesture_motion_ = APDS9960_DIR_FAR
             return True
-	
+
         # determine swipe direction
         if self.gesture_ud_count_ == -1 and self.gesture_lr_count_ == 0:
             self.gesture_motion_ = APDS9960_DIR_UP
@@ -458,7 +458,7 @@ class APDS9960:
                 self.gesture_motion_ = APDS9960_DIR_RIGHT
         else:
             return False
-	
+
         return True
 
 
@@ -501,7 +501,7 @@ class APDS9960:
                 int: the value of the LED drive strength
         """
         val = self._read_byte_data(APDS9960_REG_CONTROL)
-	
+
         # shift and mask out LED drive bits
         return (val >> 6) & 0b00000011
 
@@ -518,13 +518,13 @@ class APDS9960:
                 drive (int): value for the LED drive strength
         """
         val = self._read_byte_data(APDS9960_REG_CONTROL)
-	
+
         # set bits in register to given value
         drive &= 0b00000011
         drive = drive << 6
         val &= 0b00111111
         val |= drive
-	
+
         self._write_byte_data(APDS9960_REG_CONTROL, val)
 
 
@@ -564,7 +564,7 @@ class APDS9960:
         drive = drive << 2
         val &= 0b11110011
         val |= drive
-	
+
         self._write_byte_data(APDS9960_REG_CONTROL, val)
 
 
@@ -581,7 +581,7 @@ class APDS9960:
                 int: the value of the ALS gain
         """
         val = self._read_byte_data(APDS9960_REG_CONTROL)
-	
+
         # shift and mask out ADRIVE bits
         return (val & 0b00000011)
 
@@ -598,12 +598,12 @@ class APDS9960:
                 drive (int): value for the ALS gain
         """
         val = self._read_byte_data(APDS9960_REG_CONTROL)
-	
+
         # set bits in register to given value
         drive &= 0b00000011
         val &= 0b11111100
         val |= drive
-	
+
         self._write_byte_data(APDS9960_REG_CONTROL, val)
 
 
@@ -620,7 +620,7 @@ class APDS9960:
                 int: the LED boost value
         """
         val = self._read_byte_data(APDS9960_REG_CONFIG2)
-	
+
         # shift and mask out LED_BOOST bits
         return (val >> 4) & 0b00000011
 
@@ -637,13 +637,13 @@ class APDS9960:
                 boost (int): value for the LED boost
         """
         val = self._read_byte_data(APDS9960_REG_CONFIG2)
-	
+
         # set bits in register to given value
         boost &= 0b00000011
         boost = boost << 4
         val &= 0b11001111
         val |= boost
-	
+
         self._write_byte_data(APDS9960_REG_CONFIG2, val)
 
 
@@ -654,7 +654,7 @@ class APDS9960:
                 bool: True if compensation is enabled, False if not
         """
         val = self._read_byte_data(APDS9960_REG_CONFIG3)
-	
+
         # Shift and mask out PCMP bits
         val = (val >> 5) & 0b00000001
         return val == 1
@@ -666,12 +666,12 @@ class APDS9960:
                 enable (bool): True to enable compensation, False to disable
         """
         val = self._read_byte_data(APDS9960_REG_CONFIG3)
-	
+
         # set bits in register to given value
         val &= 0b11011111
         if enable:
             val |= 0b00100000
-	
+
         self._write_byte_data(APDS9960_REG_CONFIG3, val)
 
 
@@ -690,7 +690,7 @@ class APDS9960:
                 int: Current proximity mask for photodiodes.
         """
         val = self._read_byte_data(APDS9960_REG_CONFIG3)
-	
+
         # mask out photodiode enable mask bits
         return val & 0b00001111
 
@@ -709,12 +709,12 @@ class APDS9960:
                 mask (int): 4-bit mask value
         """
         val = self._read_byte_data(APDS9960_REG_CONFIG3)
-	
+
         # set bits in register to given value
         mask &= 0b00001111
         val &= 0b11110000
         val |= mask
-	
+
         self._write_byte_data(APDS9960_REG_CONFIG3, val)
 
 
@@ -788,7 +788,7 @@ class APDS9960:
         gain = gain << 5
         val &= 0b10011111
         val |= gain
-	
+
         self._write_byte_data(APDS9960_REG_GCONF2, val)
 
 
@@ -805,7 +805,7 @@ class APDS9960:
                 int: the LED drive current value
         """
         val = self._read_byte_data(APDS9960_REG_GCONF2)
-	
+
         # shift and mask out LED drive bits
         return (val >> 3) & 0b00000011
 
@@ -822,13 +822,13 @@ class APDS9960:
                 drive (int): value for the LED drive current
         """
         val = self._read_byte_data(APDS9960_REG_GCONF2)
-	
+
         # set bits in register to given value
         drive &= 0b00000011;
         drive = drive << 3;
         val &= 0b11100111;
         val |= drive;
-	
+
         self._write_byte_data(APDS9960_REG_GCONF2, val)
 
 
@@ -849,7 +849,7 @@ class APDS9960:
                 int: the current wait time between gestures
         """
         val = self._read_byte_data(APDS9960_REG_GCONF2)
-	
+
         # shift and mask out LED drive bits
         return val & 0b00000111
 

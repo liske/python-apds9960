@@ -31,4 +31,4 @@ try:
 
 finally:
     GPIO.cleanup()
-    print "Bye"
+    print("Bye")

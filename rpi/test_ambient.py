@@ -25,8 +25,11 @@ try:
     while True:
         sleep(0.25)
         val = apds.readAmbientLight()
+        r = apds.readRedLight()
+        g = apds.readGreenLight()
+        b = apds.readBlueLight()
         if val != oval:
-            print("AmbientLight={}".format(val))
+            print("AmbientLight={} (R: {}, G: {}, B: {})".format(val, r, g, b))
             oval = val
 
 finally:

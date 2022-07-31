@@ -97,9 +97,9 @@ class APDS9960:
                 reg_val = 0x00
         else:
             if enable:
-                reg_val |= (1 << mode);
+                reg_val |= (1 << mode)
             else:
-                reg_val &= ~(1 << mode);
+                reg_val &= ~(1 << mode)
 
         # write value to ENABLE register
         self._write_byte_data(APDS9960_REG_ENABLE, reg_val)
@@ -158,7 +158,7 @@ class APDS9960:
         val = self._read_byte_data(APDS9960_REG_GSTATUS)
 
         # shift and mask out GVALID bit
-        val &= APDS9960_BIT_GVALID;
+        val &= APDS9960_BIT_GVALID
 
         return (val == APDS9960_BIT_GVALID)
 
@@ -230,6 +230,15 @@ class APDS9960:
     # *******************************************************************************
     # ambient light and color sensor controls
     # *******************************************************************************
+
+    # check if there is new light data available
+    def isLightAvailable(self):
+        val = self._read_byte_data(APDS9960_REG_STATUS)
+
+        # shift and mask out AVALID bit
+        val &= APDS9960_BIT_AVALID
+
+        return (val == APDS9960_BIT_AVALID)
 
     # reads the ambient (clear) light level as a 16-bit value
     def readAmbientLight(self):
@@ -825,10 +834,10 @@ class APDS9960:
         val = self._read_byte_data(APDS9960_REG_GCONF2)
 
         # set bits in register to given value
-        drive &= 0b00000011;
-        drive = drive << 3;
-        val &= 0b11100111;
-        val |= drive;
+        drive &= 0b00000011
+        drive = drive << 3
+        val &= 0b11100111
+        val |= drive
 
         self._write_byte_data(APDS9960_REG_GCONF2, val)
 
@@ -970,7 +979,7 @@ class APDS9960:
         val = self._read_byte_data(APDS9960_REG_ENABLE)
 
         # set bits in register to given value
-        val &= 0b11101111;
+        val &= 0b11101111
         if enable:
             val |= 0b00010000
 
@@ -995,7 +1004,7 @@ class APDS9960:
         val = self._read_byte_data(APDS9960_REG_ENABLE)
 
         # set bits in register to given value
-        val &= 0b11011111;
+        val &= 0b11011111
         if enable:
             val |= 0b00100000
 
@@ -1061,7 +1070,7 @@ class APDS9960:
         if enable:
             val |= 0b00000001
 
-        self._write_byte_data(APDS9960_REG_GCONF4, val)  
+        self._write_byte_data(APDS9960_REG_GCONF4, val)
 
 
     # *******************************************************************************

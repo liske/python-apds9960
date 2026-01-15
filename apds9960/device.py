@@ -240,46 +240,52 @@ class APDS9960:
 
         return (val == APDS9960_BIT_AVALID)
 
+    # read R/G/B/C light levels as a tuple of 4 16-bit values
+    def readLight(self):
+        # read all 4 channels at once from consecutive registers
+        data = self._read_i2c_block_data(APDS9960_REG_CDATAL, 8)
+
+        return (data[2] | data[3] << 8,
+                data[4] | data[5] << 8,
+                data[6] | data[7] << 8,
+                data[0] | data[1] << 8)
+
     # reads the ambient (clear) light level as a 16-bit value
     def readAmbientLight(self):
-        # read value from clear channel, low byte register
-        l = self._read_byte_data(APDS9960_REG_CDATAL)
-
-        # read value from clear channel, high byte register
-        h = self._read_byte_data(APDS9960_REG_CDATAH)
+        # read value from clear channel, low byte register first
+        l, h = self._read_i2c_block_data(APDS9960_REG_CDATAL, 2)
 
         return l + (h << 8)
 
     # reads the red light level as a 16-bit value
     def readRedLight(self):
-        # read value from red channel, low byte register
-        l = self._read_byte_data(APDS9960_REG_RDATAL)
-
-        # read value from red channel, high byte register
-        h = self._read_byte_data(APDS9960_REG_RDATAH)
+        # read value from red channel, low byte register first
+        l, h = self._read_i2c_block_data(APDS9960_REG_RDATAL, 2)
 
         return l + (h << 8)
 
     # reads the green light level as a 16-bit value
     def readGreenLight(self):
-        # read value from green channel, low byte register
-        l = self._read_byte_data(APDS9960_REG_GDATAL)
-
-        # read value from green channel, high byte register
-        h = self._read_byte_data(APDS9960_REG_GDATAH)
+        # read value from green channel, low byte register first
+        l, h = self._read_i2c_block_data(APDS9960_REG_GDATAL, 2)
 
         return l + (h << 8)
 
     # reads the blue light level as a 16-bit value
     def readBlueLight(self):
-        # read value from blue channel, low byte register
-        l = self._read_byte_data(APDS9960_REG_BDATAL)
-
-        # read value from blue channel, high byte register
-        h = self._read_byte_data(APDS9960_REG_BDATAH)
+        # read value from blue channel, low byte register first
+        l, h = self._read_i2c_block_data(APDS9960_REG_BDATAL, 2)
 
         return l + (h << 8)
 
+    # set the integration time for the light sensor to nearest multiple of 2.78ms
+    def setLightIntegrationTime(self, time):
+        v = 256 - round(time / 2.78)
+        if v > 255:
+            raise ValueError("Integration time too short")
+        if v < 0:
+            raise ValueError("Integration time too long")
+        self._write_byte_data(APDS9960_REG_ATIME, v)
 
     # *******************************************************************************
     # Proximity sensor controls

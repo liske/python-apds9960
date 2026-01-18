@@ -2,10 +2,18 @@
 
 from distutils.core import setup
 
+def version():
+    with open("apds9960/__init__.py") as fd:
+        for line in fd:
+            if line.startswith('__version__'):
+                delim = '"' if '"' in line else "'"
+                return line.split(delim)[1]
+    raise RuntimeError("Unable to find version string.")
+
 setup(
     name = 'apds9960',
     packages = ['apds9960'],
-    version = '0.2',
+    version = version(),
     description = 'Python APDS-9960 Library',
     author = 'Thomas Liske',
     author_email = 'thomas@fiasko-nw.net',

@@ -1,13 +1,35 @@
+needrestart (0.3.0)
+
+  * Features:
+    - add device id -0x55
+      (github pr #8 by Trevor Sullivan @pcgeek86)
+    - add more bit values and isLightAvailable method
+      (github pr #14 by Rick @raceking37)
+
+  * Changes:
+    - add example reading RGB values from the light sensor
+      (github pr #12 by Mariusz Karpiarz @mkarpiarz)
+    - speedup read*Light methods, add setLightIntegrationTime method
+      (github pr #19 by @kai-morich)
+
+  * Fixes:
+    - make examples python3 compatible
+      (github pr #11 by Mariusz Karpiarz @mkarpiarz)
+    - micropython compatible exception creation
+      (github pr #18 by @kai-morich)
+
+ -- Thomas Liske <thomas@fiasko-nw.net>  Sun, 18 Jan 2026 11:50:25 +0100
+
 needrestart (0.2)
 
   * Features:
     - micropython port
-    (github pr #2 by Thomas Waldmann @ThomasWaldmann)
+      (github pr #2 by Thomas Waldmann @ThomasWaldmann)
     - upload to PyPi
 
   * Changes:
     - add 0xa8 to valid device id's
-    (github pr #1 by Ristomatti Airo @ristomatti)
+      (github pr #1 by Ristomatti Airo @ristomatti)
 
  -- Thomas Liske <thomas@fiasko-nw.net>  Sun, 15 Apr 2018 21:36:49 +0200
 
@@ -16,4 +38,3 @@ needrestart (0.1)
   * Initial release.
 
  -- Thomas Liske <thomas@fiasko-nw.net>  Tue, 06 Jun 2017 01:30:55 +0200
-

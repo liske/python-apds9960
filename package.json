@@ -1,0 +1,9 @@
+{
+  "urls": [
+    ["apds9960/__init__.py", "github:liske/python-apds9960/apds9960/__init__.py"],
+    ["apds9960/const.py", "github:liske/python-apds9960/apds9960/const.py"],
+    ["apds9960/device.py", "github:liske/python-apds9960/apds9960/device.py"],
+    ["apds9960/exceptions.py", "github:liske/python-apds9960/apds9960/exceptions.py"]
+  ],
+  "version": "0.3.0"
+}
